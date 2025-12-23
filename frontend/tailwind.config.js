@@ -11,5 +11,8 @@ export default {
       'home-heading-large': ['48px', { lineHeight: '56px' }],
       'default': ['15px', { lineHeight: '21px' }],
     },
+    gridTemplateColumns: {
+      'auto': 'repeat(auto-fit, minmax(200px, 1fr))',
+    }
   },
 }
