@@ -10,10 +10,22 @@ export const AppContextProvider = ({ children }) => {
 
   const navigate = useNavigate()
   const [allcourses, setAllCourses] = useState([]);
+  const [isEducator, setIsEducator] = useState(true);
+
 
   //Fetch all courses
   const fetchAllCourses = async () => {
     setAllCourses(dummyCourses)
+  }
+
+  //Calculate average rating for a course
+  const calculateRating = (course) => {
+    if (course.courseRatings.length === 0) return 0;
+    let totalRating = 0;
+    course.courseRatings.forEach(rating => {
+      totalRating += rating.rating;
+    })
+    return totalRating / course.courseRatings.length;
   }
 
   useEffect(() => {
@@ -21,11 +33,11 @@ export const AppContextProvider = ({ children }) => {
   }, []);
   const value = {
     // Define any shared state or functions here
-    currency,allcourses,navigate
-  };        
-    return (
-        <AppContext.Provider value={value}>
-            {children}
-        </AppContext.Provider>
-    )
+    currency, allcourses, navigate, calculateRating ,isEducator, setIsEducator
+  };
+  return (
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
+  )
 }
