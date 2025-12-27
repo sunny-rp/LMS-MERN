@@ -12,6 +12,7 @@ export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const [allcourses, setAllCourses] = useState([]);
   const [isEducator, setIsEducator] = useState(true);
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
 
 
   //Fetch all courses
@@ -56,13 +57,20 @@ export const AppContextProvider = ({ children }) => {
       return totalLectures
     }
 
+    // Fetch User Enrolled Courses
+    const fetchUserEnrolledCourses = async () => {
+      // Dummy Implementation
+      setEnrolledCourses(dummyCourses);
+    }
+
 
   useEffect(() => {
     fetchAllCourses();
+    fetchUserEnrolledCourses();
   }, []);
   const value = {
     // Define any shared state or functions here
-    currency, allcourses, navigate, calculateRating ,isEducator, setIsEducator ,calculateChapterTime, calculateCourseDuration, calculateNoOfLectures  
+    currency, allcourses, navigate, calculateRating ,isEducator, setIsEducator ,calculateChapterTime, calculateCourseDuration, calculateNoOfLectures , enrolledCourses , fetchUserEnrolledCourses
   };
   return (
     <AppContext.Provider value={value}>
